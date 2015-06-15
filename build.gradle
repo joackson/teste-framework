@@ -13,14 +13,14 @@ buildscript {
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
-apply plugin: 'idea'
-//apply plugin: 'spring-boot' 
-apply plugin: 'io.spring.dependency-management' 
-apply plugin: 'maven'
 
 jar {
     baseName = 'teste-framework'
     version = '0.0.1-SNAPSHOT'
+}
+
+configurations {
+    provided
 }
 
 sourceCompatibility = 1.8
@@ -36,21 +36,12 @@ repositories {
 dependencies {
 //    compile("org.springframework.data:spring-data-redis:1.4.2.RELEASE")
     compile("org.springframework.boot:spring-boot-starter-redis:1.2.3.RELEASE") {
-		transitive = true;
-	}
-    compile("org.codehaus.jackson:jackson-core-asl:1.9.13") {
-		transitive = false;
-	}
-	
-}
-
-uploadArchives {
-    repositories.mavenDeployer {
-    configuration = configurations.archives
-        repository(url: "http://localhost:8281/nexus/content/repositories/snapshots") {
-            authentication(userName: "admin", password: "admin123")
-        }
+        transitive = true;
     }
+    compile("org.codehaus.jackson:jackson-core-asl:1.9.13") {
+        transitive = false;
+    }
+    
 }
 
 
